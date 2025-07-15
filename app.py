@@ -7,8 +7,10 @@ from concurrent.futures import ThreadPoolExecutor
 # --------- Core Bot Class ---------
 class PostBot:
     def __init__(self):
-        self.tavily_client = TavilyClient(api_key="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")
-        genai.configure(api_key="AIzaSyDYEFcG8xwMKQc9iNSMIyrKcWBdGhk4q4U")
+        TAVILY_API_KEY = st.secrets.get("TAVILY_API_KEY")
+        self.tavily_client = TavilyClient(api_key=TAVILY_API_KEY)
+        GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY")
+        genai.configure(api_key=GEMINI_API_KEY)
         self.model = genai.GenerativeModel("gemini-2.5-flash")
 
     def web_search(self, query):
